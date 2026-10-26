@@ -606,6 +606,59 @@ body.tv.idle {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.floor-tools {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 1.2);
+}
+.fs-btn {
+  display: grid;
+  place-items: center;
+  width: calc(var(--u) * 2.4);
+  height: calc(var(--u) * 2.4);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  opacity: 0.28;
+  cursor: pointer;
+  transition: opacity 0.3s, background 0.3s, transform 0.3s;
+}
+.fs-btn svg {
+  width: 62%;
+  height: 62%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.fs-btn .fs-exit,
+.is-fullscreen .fs-btn .fs-enter {
+  display: none;
+}
+.is-fullscreen .fs-btn .fs-exit {
+  display: inline;
+}
+.fs-btn:hover,
+.fs-btn:focus-visible {
+  opacity: 1;
+  background: rgba(35, 35, 39, 0.08);
+  outline: none;
+}
+/* TV kumandasıyla odaklanınca net görünsün */
+.fs-btn:focus-visible {
+  box-shadow: 0 0 0 calc(var(--u) * 0.2) var(--orange);
+  transform: scale(1.15);
+}
+.is-fullscreen .fs-btn {
+  opacity: 0.12;
+}
+.idle .fs-btn:not(:focus-visible) {
+  opacity: 0;
+}
 .sync {
   flex: none;
   display: flex;

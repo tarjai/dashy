@@ -343,11 +343,32 @@ async function keepAwake() {
 }
 document.addEventListener("visibilitychange", () => document.visibilityState === "visible" && keepAwake());
 
+// eski TV tarayıcıları (Tizen / webOS) için webkit önekleriyle birlikte
+const fsElement = () => document.fullscreenElement || document.webkitFullscreenElement;
 function toggleFullscreen() {
-  if (document.fullscreenElement) document.exitFullscreen?.();
-  else document.documentElement.requestFullscreen?.().catch(() => {});
+  const root = document.documentElement;
+  if (fsElement()) (document.exitFullscreen || document.webkitExitFullscreen)?.call(document);
+  else {
+    const req = root.requestFullscreen || root.webkitRequestFullscreen;
+    Promise.resolve(req?.call(root, { navigationUI: "hide" })).catch(() => {});
+  }
 }
+function syncFullscreenState() {
+  const on = !!fsElement();
+  document.body.classList.toggle("is-fullscreen", on);
+  $("fsBtn").setAttribute("aria-label", on ? "Tam ekrandan çık" : "Tam ekran");
+}
+document.addEventListener("fullscreenchange", syncFullscreenState);
+document.addEventListener("webkitfullscreenchange", syncFullscreenState);
+$("fsBtn").addEventListener("click", (e) => {
+  e.stopPropagation();
+  toggleFullscreen();
+});
+$("fsBtn").addEventListener("dblclick", (e) => e.stopPropagation());
+
 document.addEventListener("keydown", (e) => {
+  // odaktaki butonda Enter zaten click üretir; çift tetiklemeyi önle
+  if (e.target.closest?.("button")) return;
   if (e.key === "Enter" || e.key === "f") toggleFullscreen();
   if (e.key === "t") flash();
   if (e.key === "c") location.href = "control.html";
