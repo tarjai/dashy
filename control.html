@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dopamin Kontrol</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Italiana&family=Manrope:wght@500;600;700;800&display=swap"
+    />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/control.css" />
+  </head>
+  <body class="cp">
+    <header class="bar">
+      <div class="bar-brand">
+        <span class="bar-logo">Dopamin</span>
+        <span class="bar-sub">Kontrol Paneli</span>
+      </div>
+      <span class="bar-status" id="status">Yükleniyor…</span>
+      <div class="bar-actions">
+        <a class="btn ghost" href="./" target="dopamin-tv">Ekranı aç ↗</a>
+        <button class="btn primary" id="publish">Kaydet &amp; Yayınla</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="col-main">
+        <div class="sec-head">
+          <h2>Pencereler</h2>
+          <div class="sec-tools">
+            <div class="seg-ctl" id="countCtl" role="radiogroup" aria-label="Pencere sayısı">
+              <button data-n="3">3</button><button data-n="4">4</button><button data-n="5">5</button>
+            </div>
+            <button class="btn soft" id="shuffle">🎲 Temaları karıştır</button>
+          </div>
+        </div>
+        <p class="hint">
+          Markdown: <code># başlık</code> <code>- madde</code> <code>- [ ] görev</code> <code>- [x] bitti</code>
+          <code>**kalın**</code> <code>==vurgu==</code> <code>!!acil!!</code> <code>&gt; alıntı</code> <code>---</code>
+        </p>
+        <div class="win-list" id="winList"></div>
+      </section>
+
+      <aside class="col-side">
+        <div class="card preview-card">
+          <div class="card-head">
+            <h3>Canlı önizleme</h3>
+            <button class="btn soft sm" id="testFlash">⚡ Flaşı dene</button>
+          </div>
+          <div class="preview" id="preview">
+            <iframe id="previewFrame" src="./?preview=1" title="TV önizleme" tabindex="-1"></iframe>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Gün &amp; şerit</h3>
+          <div class="row">
+            <label class="field">
+              <span>Gün başlangıcı</span>
+              <select id="dayStart"></select>
+            </label>
+            <div class="field grow">
+              <span>Bitiş</span>
+              <output id="dayEnd" class="out"></output>
+            </div>
+          </div>
+          <div class="blocks" id="blockNames"></div>
+          <div class="sub-head">
+            <span>Şerit işaretleri</span>
+            <button class="btn soft sm" id="addMarker">+ İşaret</button>
+          </div>
+          <div class="markers" id="markerList"></div>
+        </div>
+
+        <div class="card">
+          <h3>Efektler</h3>
+          <label class="toggle"><input type="checkbox" id="wiggle" /><span>Pencere sallanması (wiggle)</span></label>
+          <label class="toggle"><input type="checkbox" id="flashOn" /><span>Rastgele ekran flaşı</span></label>
+          <div class="row">
+            <label class="field">
+              <span>Flaş tipi</span>
+              <select id="flashMode">
+                <option value="mix">Karışık</option>
+                <option value="white">Beyaz</option>
+                <option value="color">Renkli</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>En az (dk)</span>
+              <input type="number" id="flashMin" min="1" max="240" />
+            </label>
+            <label class="field">
+              <span>En çok (dk)</span>
+              <input type="number" id="flashMax" min="1" max="480" />
+            </label>
+          </div>
+          <label class="toggle"><input type="checkbox" id="flashBlock" /><span>Blok değişiminde flaş</span></label>
+          <label class="toggle"><input type="checkbox" id="flashMarker" /><span>İşaret saatinde flaş</span></label>
+        </div>
+
+        <div class="card">
+          <h3>Metinler</h3>
+          <label class="field">
+            <span>Başlık</span>
+            <input type="text" id="title" maxlength="24" />
+          </label>
+          <label class="field">
+            <span>Alt satır (zemindeki söz)</span>
+            <input type="text" id="footer" maxlength="120" />
+          </label>
+        </div>
+
+        <div class="card">
+          <h3>Senkron · GitHub</h3>
+          <p class="hint">
+            TV, sitedeki <code>data.json</code> dosyasını okur. Yayınla butonu bu dosyayı repoya commit eder; GitHub Pages
+            ~1 dk içinde yeniler. Token yalnızca bu tarayıcıda saklanır.
+          </p>
+          <div class="row">
+            <label class="field"><span>Owner</span><input type="text" id="ghOwner" placeholder="tarjai" /></label>
+            <label class="field"><span>Repo</span><input type="text" id="ghRepo" placeholder="dashy" /></label>
+            <label class="field"><span>Dal</span><input type="text" id="ghBranch" placeholder="main" /></label>
+          </div>
+          <label class="field">
+            <span>Fine-grained token (Contents: Read and write)</span>
+            <input type="password" id="ghToken" placeholder="github_pat_…" autocomplete="off" />
+          </label>
+          <div class="row end">
+            <a
+              class="link"
+              href="https://github.com/settings/personal-access-tokens/new"
+              target="_blank"
+              rel="noopener"
+              >Token oluştur ↗</a
+            >
+            <button class="btn soft sm" id="ghTest">Bağlantıyı test et</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Yedek</h3>
+          <div class="row">
+            <button class="btn soft sm" id="exportBtn">JSON indir</button>
+            <label class="btn soft sm file">JSON yükle<input type="file" id="importFile" accept="application/json" /></label>
+            <button class="btn soft sm danger" id="resetBtn">Varsayılana dön</button>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <template id="winTpl">
+      <article class="wcard">
+        <div class="wcard-head">
+          <span class="wnum"></span>
+          <input class="wtitle" type="text" placeholder="Pencere başlığı" maxlength="60" />
+          <select class="wtpl" title="Şablon">
+            <option value="">Şablon…</option>
+            <option value="odak">Günün odakları</option>
+            <option value="onemli">Önemli konular</option>
+            <option value="hafta">Haftanın görünümü</option>
+            <option value="hatirlat">Hatırlatmalar</option>
+            <option value="bos">Boşalt</option>
+          </select>
+        </div>
+        <div class="themes" role="radiogroup" aria-label="Tema"></div>
+        <textarea class="wbody" rows="7" spellcheck="false" placeholder="Markdown metni…"></textarea>
+        <span class="wcard-off">Gizli — pencere sayısını artırınca görünür</span>
+      </article>
+    </template>
+
+    <script type="module" src="assets/js/control.js"></script>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "updatedAt": 1,
+  "settings": {
+    "title": "Dopamin",
+    "dayStart": 8,
+    "blockNames": [
+      "Sabah",
+      "Öğle",
+      "İkindi",
+      "Akşam"
+    ],
+    "windowCount": 4,
+    "wiggle": true,
+    "footer": "Tek iş. Şimdi. Sonra mola.",
+    "flash": {
+      "enabled": true,
+      "mode": "mix",
+      "minMinutes": 15,
+      "maxMinutes": 40,
+      "onBlockChange": true,
+      "onMarker": true
+    }
+  },
+  "markers": [
+    {
+      "time": "10:30",
+      "label": "Stand-up"
+    },
+    {
+      "time": "13:00",
+      "label": "Öğle arası"
+    },
+    {
+      "time": "17:30",
+      "label": "Gün sonu gözden geçir"
+    }
+  ],
+  "windows": [
+    {
+      "id": "w1",
+      "title": "Bugünün Odakları",
+      "theme": "hardal",
+      "body": "- [ ] **Tek büyük iş:** sunum taslağı\n- [ ] 3 e-postayı cevapla\n- [x] Sabah planı\n- [ ] 25 dk derin çalışma × 4"
+    },
+    {
+      "id": "w2",
+      "title": "Önemli Konular",
+      "theme": "portakal",
+      "body": "### Bu hafta\n- !!Cuma teslim!! müşteri raporu\n- Fatura ödemeleri\n- ==Doktor randevusu== Perşembe 15:00"
+    },
+    {
+      "id": "w3",
+      "title": "Haftanın Görünümü",
+      "theme": "mint",
+      "body": "1. **Pzt** — Planlama\n2. **Sal** — Derin iş\n3. **Çar** — Toplantılar\n4. **Per** — Üretim\n5. **Cum** — Teslim + kapanış"
+    },
+    {
+      "id": "w4",
+      "title": "Hatırlatmalar",
+      "theme": "antrasit",
+      "body": "- Su iç 💧\n- Her blok sonunda 10 dk yürü\n- Telefonu başka odaya bırak\n\n> Başlamak, bitirmenin yarısı."
+    },
+    {
+      "id": "w5",
+      "title": "Notlar",
+      "theme": "pudra",
+      "body": "Aklına geleni buraya yaz, sonra dön."
+    }
+  ]
+}

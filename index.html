@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dopamin</title>
+    <meta name="theme-color" content="#a9ddcc" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Italiana&family=Manrope:wght@500;600;700;800&display=swap"
+    />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/tv.css" />
+  </head>
+  <body class="tv">
+    <div class="room" id="room">
+      <header class="top">
+        <div class="brand">
+          <h1 id="brandTitle">Dopamin</h1>
+          <div class="date" id="date"></div>
+        </div>
+
+        <svg class="lamp" viewBox="0 0 200 260" aria-hidden="true">
+          <defs>
+            <linearGradient id="lampGold" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f3d88a" />
+              <stop offset="1" stop-color="#b8892f" />
+            </linearGradient>
+            <radialGradient id="lampGlobe" cx=".38" cy=".35" r=".7">
+              <stop offset="0" stop-color="#ffffff" />
+              <stop offset="1" stop-color="#e9e4da" />
+            </radialGradient>
+          </defs>
+          <line x1="100" y1="0" x2="100" y2="120" stroke="#232327" stroke-width="2.5" />
+          <path d="M18 182 A82 66 0 0 1 182 182 Z" fill="#232327" />
+          <ellipse cx="100" cy="182" rx="82" ry="11" fill="url(#lampGold)" />
+          <line x1="100" y1="190" x2="100" y2="222" stroke="#232327" stroke-width="2" />
+          <circle cx="100" cy="236" r="18" fill="url(#lampGlobe)" />
+        </svg>
+
+        <div class="status" id="status">
+          <div class="status-block">
+            <span class="status-kicker" id="blockKicker">Blok 1 / 4</span>
+            <span class="status-name" id="blockName">Sabah</span>
+          </div>
+          <div class="status-left">
+            <span class="status-kicker">Blokta kalan</span>
+            <span class="status-remain" id="blockRemain">0:00</span>
+          </div>
+          <div class="status-day">
+            <div class="dayline"><i id="dayFill"></i></div>
+            <span id="dayText"></span>
+          </div>
+        </div>
+
+        <div class="clock" id="clock" aria-label="Saat"></div>
+      </header>
+
+      <section class="timeline" aria-label="Günün 16 saati">
+        <div class="strip" id="strip">
+          <div class="segments">
+            <div class="seg-row" id="segments"></div>
+            <div class="past" id="past"></div>
+            <div class="ticks" id="ticks"></div>
+          </div>
+          <div class="markers" id="markers"></div>
+          <div class="now" id="now"><span class="now-pill" id="nowPill"></span></div>
+        </div>
+        <div class="hours" id="hours"></div>
+      </section>
+
+      <main class="windows" id="windows"></main>
+
+      <footer class="floor">
+        <span class="footer-text" id="footer"></span>
+        <span class="sync" id="sync" title="Senkron durumu"></span>
+      </footer>
+    </div>
+
+    <div class="flash" id="flash" aria-hidden="true"></div>
+    <div class="toast" id="toast" role="alert" hidden>
+      <div class="toast-card">
+        <span class="toast-kicker" id="toastKicker"></span>
+        <span class="toast-text" id="toastText"></span>
+      </div>
+    </div>
+
+    <script type="module" src="assets/js/tv.js"></script>
+  </body>
+</html>
