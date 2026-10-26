@@ -1,9 +1,10 @@
 // Dopamin — TV ekranı
-import { renderMarkdown } from "./md.js";
-import { BLOCK_THEMES } from "./themes.js";
-import { DATA_KEY, DAY_HOURS, DEFAULT_DATA, fetchPublished, loadLocal, normalize } from "./store.js";
+import { renderMarkdown } from "./md.js?v=20261026160549";
+import { BLOCK_THEMES } from "./themes.js?v=20261026160549";
+import { DATA_KEY, DAY_HOURS, DEFAULT_DATA, fetchPublished, loadLocal, normalize } from "./store.js?v=20261026160549";
 
 const $ = (id) => document.getElementById(id);
+const APP_VERSION = "20261026160549"; // bump.sh günceller
 const params = new URLSearchParams(location.search);
 const PREVIEW = params.has("preview"); // kontrol panelindeki önizleme
 const POLL_MS = Math.max(15, Number(params.get("poll")) || 45) * 1000;
@@ -315,7 +316,19 @@ function setSync(ok, source) {
   el.textContent = ok ? `${source} · ${t}` : "çevrimdışı";
 }
 
+// yeni sürüm yayınlandıysa TV kendini yeniler (açık kalan ekranlar eski kodda takılmasın)
+async function checkVersion() {
+  try {
+    const res = await fetch(`./version.json?t=${Date.now()}`, { cache: "no-store" });
+    const { v } = await res.json();
+    if (v && v !== APP_VERSION) location.reload();
+  } catch {
+    /* sürüm dosyası okunamadı, sonra tekrar denenir */
+  }
+}
+
 async function pull() {
+  checkVersion();
   try {
     apply(await fetchPublished(), "senkron");
   } catch {

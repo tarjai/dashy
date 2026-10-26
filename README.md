@@ -29,3 +29,6 @@ Aynı tarayıcıda açık TV sekmesi ve panel önizlemesi değişiklikleri anın
 
 ## Markdown
 `# başlık` · `- madde` · `- [ ] görev` · `- [x] bitti` · `1. sıralı` · `**kalın**` · `*italik*` · `==vurgu==` · `!!acil!!` · `> alıntı` · `---`
+
+## Yayın / önbellek
+Kodda değişiklik yaptıktan sonra push etmeden önce `./bump.sh` çalıştır. Asset adreslerindeki `?v=` sürümünü ve `version.json`'u günceller. Açık duran TV yeni sürümü 45 sn içinde fark edip kendini yeniler.

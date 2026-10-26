@@ -1,5 +1,5 @@
 // Veri modeli, yerel kayıt ve GitHub üzerinden senkron.
-import { randomThemes } from "./themes.js";
+import { randomThemes } from "./themes.js?v=20261026160549";
 
 export const DATA_KEY = "dopamin:data";
 export const SYNC_KEY = "dopamin:sync";
