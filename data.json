@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "updatedAt": 1,
+  "updatedAt": 1793030937207,
   "settings": {
     "title": "Dopamin",
-    "dayStart": 8,
+    "dayStart": 16,
     "blockNames": [
       "Sabah",
       "Öğle",
       "İkindi",
       "Akşam"
     ],
-    "windowCount": 4,
+    "windowCount": 5,
     "wiggle": true,
-    "footer": "Tek iş. Şimdi. Sonra mola.",
+    "footer": "Şİmdi tek bir iş. Sonra mola.",
     "flash": {
       "enabled": true,
       "mode": "mix",
