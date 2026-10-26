@@ -1,5 +1,5 @@
 // Dopamin — kontrol paneli
-import { THEMES, randomThemes } from "./themes.js?v=20261026160549";
+import { THEMES, randomThemes } from "./themes.js?v=20261026161052";
 import {
   DAY_HOURS,
   DEFAULT_DATA,
@@ -12,7 +12,7 @@ import {
   saveLocal,
   saveSync,
   testRemote,
-} from "./store.js?v=20261026160549";
+} from "./store.js?v=20261026161052";
 
 const $ = (id) => document.getElementById(id);
 const pad = (n) => String(n).padStart(2, "0");

@@ -1,5 +1,5 @@
 // Veri modeli, yerel kayıt ve GitHub üzerinden senkron.
-import { randomThemes } from "./themes.js?v=20261026160549";
+import { randomThemes } from "./themes.js?v=20261026161052";
 
 export const DATA_KEY = "dopamin:data";
 export const SYNC_KEY = "dopamin:sync";
@@ -171,6 +171,15 @@ const b64encode = (str) => {
 };
 const b64decode = (b64) => new TextDecoder().decode(Uint8Array.from(atob(b64.replace(/\s/g, "")), (c) => c.charCodeAt(0)));
 
+function explain(status, msg = "") {
+  if (status === 401) return "Token geçersiz ya da süresi dolmuş. Yeni token oluşturup Senkron kartına gir.";
+  if (status === 403 && /not accessible/i.test(msg))
+    return "Token'ın bu repoya yazma izni yok. Token ayarı: Repository access → Only select repositories → bu repo; Permissions → Contents → Read and write.";
+  if (status === 404) return "Repo ya da dal bulunamadı (veya token bu repoyu göremiyor). Owner / repo / dal adlarını kontrol et.";
+  if (status === 409) return "Dosya aynı anda değişti, tekrar yayınla.";
+  return msg || `GitHub ${status}`;
+}
+
 async function gh(cfg, path, opts = {}) {
   const res = await fetch(`https://api.github.com/repos/${cfg.owner}/${cfg.repo}${path}`, {
     ...opts,
@@ -184,7 +193,7 @@ async function gh(cfg, path, opts = {}) {
   });
   const body = await res.json().catch(() => ({}));
   if (!res.ok) {
-    const err = new Error(body.message || `GitHub ${res.status}`);
+    const err = new Error(explain(res.status, body.message));
     err.status = res.status;
     throw err;
   }

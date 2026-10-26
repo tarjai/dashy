@@ -1,10 +1,10 @@
 // Dopamin — TV ekranı
-import { renderMarkdown } from "./md.js?v=20261026160549";
-import { BLOCK_THEMES } from "./themes.js?v=20261026160549";
-import { DATA_KEY, DAY_HOURS, DEFAULT_DATA, fetchPublished, loadLocal, normalize } from "./store.js?v=20261026160549";
+import { renderMarkdown } from "./md.js?v=20261026161052";
+import { BLOCK_THEMES } from "./themes.js?v=20261026161052";
+import { DATA_KEY, DAY_HOURS, DEFAULT_DATA, fetchPublished, loadLocal, normalize } from "./store.js?v=20261026161052";
 
 const $ = (id) => document.getElementById(id);
-const APP_VERSION = "20261026160549"; // bump.sh günceller
+const APP_VERSION = "20261026161052"; // bump.sh günceller
 const params = new URLSearchParams(location.search);
 const PREVIEW = params.has("preview"); // kontrol panelindeki önizleme
 const POLL_MS = Math.max(15, Number(params.get("poll")) || 45) * 1000;
